@@ -58,6 +58,7 @@ footer{padding:2rem;text-align:center;font-size:0.62rem;letter-spacing:0.3em;tex
 </style>
 </head>
 <body>
+<audio id="bgmusic" src="musica.mp3" loop></audio>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="lightbox" id="lightbox">
@@ -128,6 +129,9 @@ for(let i=0;i<25;i++){
   p.style.width=p.style.height=(Math.random()>0.5?'2px':'1px');
   container.appendChild(p);
 }
+const music=document.getElementById('bgmusic');
+music.volume=0.15;
+document.addEventListener('click',()=>{music.play();},{once:true});
 const AudioCtx=window.AudioContext||window.webkitAudioContext;
 function playTone(){
   try{
