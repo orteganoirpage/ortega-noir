@@ -17,7 +17,7 @@ body.light nav{background:rgba(245,240,232,0.97)}
 .nav-links{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap}
 .nav-links a{font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.3s}
 .nav-links a:hover{color:var(--cream)}
-@media(max-width:600px){nav{padding:0.8rem 1rem}.nav-logo{font-size:1rem}.nav-links{gap:0.6rem}.nav-links a{font-size:0.5rem}}
+@media(max-width:600px){nav{padding:0.8rem 1rem}.nav-logo{font-size:1rem}.nav-links{gap:0.5rem}.nav-links a{font-size:0.48rem}}
 .icon-btn{background:none;border:1px solid rgba(200,169,126,0.3);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;color:var(--gold);font-size:0.75rem;flex-shrink:0}
 .icon-btn:hover{border-color:var(--gold)}
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
@@ -31,17 +31,29 @@ body.light .hero-bg{background:radial-gradient(ellipse at center,#e8d5b0 0%,#f5f
 .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,10vw,7rem);font-weight:300;line-height:1;letter-spacing:0.15em;color:var(--cream);text-transform:uppercase;opacity:0;animation:fadeUp 1s 0.6s forwards}
 .hero-title em{font-style:italic;color:var(--gold)}
 .hero-sub{font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--muted);margin-top:1.2rem;opacity:0;animation:fadeUp 1s 0.9s forwards}
-.hero-stats{display:flex;gap:2rem;margin-top:1.5rem;opacity:0;animation:fadeUp 1s 1.1s forwards}
+.hero-stats{display:flex;gap:2rem;margin-top:1.5rem;opacity:0;animation:fadeUp 1s 1.1s forwards;flex-wrap:wrap;justify-content:center}
 .hero-stat{text-align:center}
 .hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold)}
 .hero-stat-label{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted)}
 .hero-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);margin:1.8rem auto 0;opacity:0;animation:fadeUp 1s 1.2s forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.countdown-bar{background:var(--black2);border-bottom:1px solid rgba(200,169,126,0.08);padding:0.8rem 2rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+.countdown-label{font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted)}
+.countdown-units{display:flex;gap:1rem;align-items:center}
+.countdown-unit{text-align:center}
+.countdown-num{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);line-height:1}
+.countdown-unit-label{font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
 .section-wrap{padding:2.5rem 1.5rem;max-width:1200px;margin:0 auto}
 @media(max-width:600px){.section-wrap{padding:2rem 1rem}}
 .section-header{text-align:center;margin-bottom:2rem}
 .section-label{font-size:0.58rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:300;color:var(--cream)}
+.hall-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;max-width:800px;margin:0 auto 0}
+@media(max-width:600px){.hall-grid{grid-template-columns:1fr}}
+.hall-item{position:relative;overflow:hidden;border-radius:2px;aspect-ratio:3/4;cursor:pointer;border:1px solid rgba(200,169,126,0.3)}
+.hall-item img{width:100%;height:100%;object-fit:cover;filter:sepia(8%) brightness(0.9)}
+.hall-rank{position:absolute;top:0.5rem;left:0.5rem;font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold);text-shadow:0 2px 8px rgba(0,0,0,0.8)}
+.hall-likes{position:absolute;bottom:0.5rem;right:0.5rem;background:rgba(10,10,10,0.8);padding:3px 8px;border-radius:1px;font-size:0.58rem;color:var(--gold);letter-spacing:0.1em}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:0.6rem}
 @media(max-width:900px){.grid-4{grid-template-columns:repeat(3,1fr)}}
@@ -66,7 +78,36 @@ body.light .hero-bg{background:radial-gradient(ellipse at center,#e8d5b0 0%,#f5f
 .credit-bar{text-align:center;padding:0.8rem 0 1rem;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted)}
 .credit-bar a{color:var(--gold);text-decoration:none}
 .divider{border:none;border-top:1px solid rgba(200,169,126,0.08);margin:0}
-.about-section{padding:3rem 2rem;text-align:center;background:var(--black2)}
+.bio-section{padding:3rem 2rem;background:var(--black2)}
+.bio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;max-width:900px;margin:2rem auto 0}
+.bio-card{background:var(--black);border:1px solid rgba(200,169,126,0.1);border-radius:2px;padding:1.2rem}
+.bio-icon{font-size:1.2rem;margin-bottom:0.5rem}
+.bio-label{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem}
+.bio-value{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--cream)}
+.vote-section{padding:3rem 2rem;text-align:center}
+.vote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.8rem;max-width:900px;margin:2rem auto 0}
+.vote-btn{background:var(--black2);border:1px solid rgba(200,169,126,0.15);border-radius:2px;padding:1rem;cursor:pointer;text-align:left;transition:border-color 0.3s;font-family:'Raleway',sans-serif}
+.vote-btn:hover{border-color:var(--gold)}
+.vote-btn.voted{border-color:#e84393}
+.vote-title{font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:var(--cream);margin-bottom:0.3rem}
+.vote-year{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+.vote-bar-wrap{margin-top:0.6rem;background:rgba(200,169,126,0.1);border-radius:1px;height:3px}
+.vote-bar{height:3px;background:var(--gold);border-radius:1px;transition:width 0.5s}
+.vote-pct{font-size:0.55rem;color:var(--gold);margin-top:0.3rem;letter-spacing:0.1em}
+.fans-section{padding:3rem 2rem}
+.fan-form{display:flex;flex-direction:column;gap:0.8rem;max-width:500px;margin:2rem auto 0}
+.fan-input{background:var(--black2);border:1px solid rgba(200,169,126,0.2);border-radius:1px;padding:0.6rem 1rem;font-family:'Raleway',sans-serif;font-size:0.75rem;color:var(--cream);outline:none;transition:border 0.3s}
+.fan-input:focus{border-color:var(--gold)}
+.fan-input::placeholder{color:var(--muted)}
+.fan-messages{display:flex;flex-direction:column;gap:0.6rem;max-width:500px;margin:1.5rem auto 0}
+.fan-msg{background:var(--black2);border:1px solid rgba(200,169,126,0.1);border-radius:2px;padding:0.8rem 1rem}
+.fan-msg-name{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem}
+.fan-msg-text{font-size:0.78rem;color:var(--muted);line-height:1.7}
+.share-section{padding:3rem 2rem;text-align:center;background:var(--black2)}
+.share-btns{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
+.share-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border:1px solid rgba(200,169,126,0.2);border-radius:1px;font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:all 0.3s;cursor:pointer;background:none;font-family:'Raleway',sans-serif}
+.share-btn:hover{border-color:var(--gold);color:var(--gold)}
+.about-section{padding:3rem 2rem;text-align:center}
 .about-text{max-width:500px;margin:1rem auto 0;font-size:0.82rem;line-height:2;color:rgba(122,112,96,0.8)}
 .about-text span{color:var(--gold)}
 .films-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;max-width:1000px;margin:2rem auto 0}
@@ -78,7 +119,7 @@ body.light .hero-bg{background:radial-gradient(ellipse at center,#e8d5b0 0%,#f5f
 .film-modal{display:none;position:fixed;inset:0;background:rgba(5,5,5,0.95);z-index:1001;align-items:center;justify-content:center}
 .film-modal.active{display:flex}
 .film-modal-inner{background:var(--black2);border:1px solid rgba(200,169,126,0.2);border-radius:2px;padding:2rem;max-width:500px;width:90%;position:relative}
-.film-modal-close{position:absolute;top:1rem;right:1rem;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color 0.3s}
+.film-modal-close{position:absolute;top:1rem;right:1rem;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);cursor:pointer}
 .film-modal-close:hover{color:var(--cream)}
 .film-modal-year{font-size:0.58rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem}
 .film-modal-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--cream);margin-bottom:0.3rem;font-weight:300}
@@ -94,7 +135,7 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
 .lightbox{display:none;position:fixed;inset:0;background:rgba(5,5,5,0.97);z-index:1000;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
 .lightbox.active{display:flex}
 .lightbox img{max-width:92vw;max-height:80vh;object-fit:contain;border-radius:2px}
-.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);transition:color 0.3s;cursor:pointer}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);cursor:pointer}
 .lightbox-close:hover{color:var(--cream)}
 .lightbox-actions{display:flex;gap:0.8rem;align-items:center}
 .lightbox-like{display:flex;align-items:center;gap:8px;cursor:pointer;background:none;border:1px solid rgba(200,169,126,0.3);padding:0.5rem 1.2rem;border-radius:1px;color:var(--cream);font-family:'Raleway',sans-serif;font-size:0.65rem;letter-spacing:0.2em;transition:all 0.3s}
@@ -114,14 +155,10 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
   <span class="lightbox-close" onclick="closeLightbox()">close ✕</span>
   <img id="lightbox-img" src="" alt="">
   <div class="lightbox-actions">
-    <button class="lightbox-like" id="lightbox-like-btn" onclick="toggleLightboxLike()">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      <span id="lightbox-like-count">0</span>
-    </button>
+    <button class="lightbox-like" id="lightbox-like-btn" onclick="toggleLightboxLike()"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span id="lightbox-like-count">0</span></button>
     <button class="lightbox-share" onclick="sharePhoto()">Copy link</button>
   </div>
 </div>
-
 <div class="film-modal" id="filmModal" onclick="if(event.target===this)closeFilm()">
   <div class="film-modal-inner">
     <span class="film-modal-close" onclick="closeFilm()">close ✕</span>
@@ -132,9 +169,8 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
     <div class="film-modal-tags" id="fTags"></div>
   </div>
 </div>
-
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<div class="toast" id="toast">Link copied!</div>
+<div class="toast" id="toast">Copied!</div>
 
 <nav>
   <div class="nav-logo">ortega.noir</div>
@@ -143,10 +179,11 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
     <a href="#updates">Updates</a>
     <a href="#quotes">Quotes</a>
     <a href="#films">Films</a>
-    <a href="#about">About</a>
+    <a href="#vote">Vote</a>
+    <a href="#fans">Fans</a>
     <a href="https://www.instagram.com/ortega.noir" target="_blank">Instagram</a>
-    <button class="icon-btn" id="themeBtn" title="Theme">☀</button>
-    <button class="icon-btn" id="musicBtn" title="Music">♪</button>
+    <button class="icon-btn" id="themeBtn">☀</button>
+    <button class="icon-btn" id="musicBtn">♪</button>
   </div>
 </nav>
 
@@ -163,6 +200,28 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
       <div class="hero-stat"><div class="hero-stat-num">43</div><div class="hero-stat-label">Photos</div></div>
     </div>
     <div class="hero-line"></div>
+  </div>
+</section>
+
+<div class="countdown-bar">
+  <span class="countdown-label">🎂 Birthday countdown</span>
+  <div class="countdown-units">
+    <div class="countdown-unit"><div class="countdown-num" id="cd-days">—</div><div class="countdown-unit-label">Days</div></div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-hours">—</div><div class="countdown-unit-label">Hours</div></div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-mins">—</div><div class="countdown-unit-label">Mins</div></div>
+    <div class="countdown-unit"><div class="countdown-num" id="cd-secs">—</div><div class="countdown-unit-label">Secs</div></div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<section class="section-wrap">
+  <div class="section-header">
+    <div class="section-label">Most loved</div>
+    <h2 class="section-title">Hall of Fame</h2>
+  </div>
+  <div class="hall-grid" id="hallGrid">
+    <div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.7rem;letter-spacing:0.2em;grid-column:1/-1">Like photos to see the top 3 here 🖤</div>
   </div>
 </section>
 
@@ -264,6 +323,67 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
 
 <hr class="divider">
 
+<section class="bio-section" id="bio">
+  <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem">
+    <div style="text-align:center">
+      <div class="section-label">About her</div>
+      <h2 class="section-title">Bio</h2>
+    </div>
+    <div class="bio-grid">
+      <div class="bio-card"><div class="bio-icon">🎂</div><div class="bio-label">Birthday</div><div class="bio-value">September 27, 2002</div></div>
+      <div class="bio-card"><div class="bio-icon">📍</div><div class="bio-label">Birthplace</div><div class="bio-value">Coachella Valley, CA</div></div>
+      <div class="bio-card"><div class="bio-icon">🎭</div><div class="bio-label">Debut</div><div class="bio-value">2012 · Iron Man 3</div></div>
+      <div class="bio-card"><div class="bio-icon">🌟</div><div class="bio-label">Breakthrough</div><div class="bio-value">Wednesday (2022)</div></div>
+      <div class="bio-card"><div class="bio-icon">🎬</div><div class="bio-label">Genre</div><div class="bio-value">Horror · Drama · Comedy</div></div>
+      <div class="bio-card"><div class="bio-icon">🏆</div><div class="bio-label">Awards</div><div class="bio-value">SAG · Golden Globe Nom.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="vote-section" id="vote">
+  <div class="section-label">Your pick</div>
+  <h2 class="section-title">Favorite film?</h2>
+  <div class="vote-grid" id="voteGrid">
+    <button class="vote-btn" onclick="castVote('wednesday')"><div class="vote-title">Wednesday</div><div class="vote-year">2022 · Netflix</div><div class="vote-bar-wrap"><div class="vote-bar" id="vbar-wednesday" style="width:0%"></div></div><div class="vote-pct" id="vpct-wednesday">0%</div></button>
+    <button class="vote-btn" onclick="castVote('beetlejuice')"><div class="vote-title">Beetlejuice Beetlejuice</div><div class="vote-year">2024 · Tim Burton</div><div class="vote-bar-wrap"><div class="vote-bar" id="vbar-beetlejuice" style="width:0%"></div></div><div class="vote-pct" id="vpct-beetlejuice">0%</div></button>
+    <button class="vote-btn" onclick="castVote('scream')"><div class="vote-title">Scream</div><div class="vote-year">2022 · Horror</div><div class="vote-bar-wrap"><div class="vote-bar" id="vbar-scream" style="width:0%"></div></div><div class="vote-pct" id="vpct-scream">0%</div></button>
+    <button class="vote-btn" onclick="castVote('you')"><div class="vote-title">You — Season 2</div><div class="vote-year">2019 · Netflix</div><div class="vote-bar-wrap"><div class="vote-bar" id="vbar-you" style="width:0%"></div></div><div class="vote-pct" id="vpct-you">0%</div></button>
+    <button class="vote-btn" onclick="castVote('scream6')"><div class="vote-title">Scream VI</div><div class="vote-year">2023 · Horror</div><div class="vote-bar-wrap"><div class="vote-bar" id="vbar-scream6" style="width:0%"></div></div><div class="vote-pct" id="vpct-scream6">0%</div></button>
+    <button class="vote-btn" onclick="castVote('yesday')"><div class="vote-title">Yes Day</div><div class="vote-year">2021 · Comedy</div><div class="vote-bar-wrap"><div class="vote-bar" id="vbar-yesday" style="width:0%"></div></div><div class="vote-pct" id="vpct-yesday">0%</div></button>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="fans-section" id="fans">
+  <div style="text-align:center">
+    <div class="section-label">Community</div>
+    <h2 class="section-title">Fan Messages</h2>
+  </div>
+  <div class="fan-form">
+    <input class="fan-input" id="fanName" placeholder="Your name or @username" maxlength="30">
+    <textarea class="fan-input" id="fanMsg" placeholder="Leave a message for the community..." rows="3" maxlength="200" style="resize:none"></textarea>
+    <button class="btn" onclick="submitFanMsg()" style="align-self:center">Send message →</button>
+  </div>
+  <div class="fan-messages" id="fanMessages"></div>
+</section>
+
+<hr class="divider">
+
+<section class="share-section">
+  <div class="section-label">Spread the love</div>
+  <h2 class="section-title">Share this page</h2>
+  <div class="share-btns">
+    <a class="share-btn" href="https://wa.me/?text=Check%20out%20this%20Jenna%20Ortega%20fan%20page!%20https://orteganoirpage.github.io/ortega-noir" target="_blank">WhatsApp</a>
+    <a class="share-btn" href="https://twitter.com/intent/tweet?text=Check%20out%20this%20Jenna%20Ortega%20fan%20page!&url=https://orteganoirpage.github.io/ortega-noir" target="_blank">Twitter / X</a>
+    <button class="share-btn" onclick="copyLink()">Copy link</button>
+  </div>
+</section>
+
+<hr class="divider">
+
 <section class="about-section" id="about">
   <div class="section-label">About</div>
   <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--cream)">ortega.noir</h2>
@@ -291,36 +411,91 @@ const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 let currentPhoto=null;
 const liked=JSON.parse(localStorage.getItem('liked')||'{}');
 
-let visits=parseInt(localStorage.getItem('visits')||'0');
-visits++;
-localStorage.setItem('visits',visits);
-const vn=document.getElementById('visit-num');
-if(vn)vn.textContent=visits.toLocaleString();
+// visits
+let visits=parseInt(localStorage.getItem('visits')||'0');visits++;localStorage.setItem('visits',visits);
+const vn=document.getElementById('visit-num');if(vn)vn.textContent=visits.toLocaleString();
 
+// theme
 const themeBtn=document.getElementById('themeBtn');
 if(localStorage.getItem('theme')==='light'){document.body.classList.add('light');themeBtn.textContent='🌙';}
-themeBtn.addEventListener('click',()=>{
-  document.body.classList.toggle('light');
-  const isLight=document.body.classList.contains('light');
-  localStorage.setItem('theme',isLight?'light':'dark');
-  themeBtn.textContent=isLight?'🌙':'☀';
-});
+themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light');const isLight=document.body.classList.contains('light');localStorage.setItem('theme',isLight?'light':'dark');themeBtn.textContent=isLight?'🌙':'☀';});
 
-window.addEventListener('scroll',()=>{
-  document.getElementById('backTop').classList.toggle('show',window.scrollY>500);
-});
+// back to top
+window.addEventListener('scroll',()=>{document.getElementById('backTop').classList.toggle('show',window.scrollY>500);});
 
+// countdown
+function updateCountdown(){
+  const now=new Date();
+  let bday=new Date(now.getFullYear(),8,27);
+  if(now>bday)bday=new Date(now.getFullYear()+1,8,27);
+  const diff=bday-now;
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('cd-days').textContent=d;
+  document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
+}
+updateCountdown();setInterval(updateCountdown,1000);
+
+// vote
+const votes=JSON.parse(localStorage.getItem('votes')||'{"wednesday":0,"beetlejuice":0,"scream":0,"you":0,"scream6":0,"yesday":0}');
+const myVote=localStorage.getItem('myVote');
+if(myVote){const btn=document.querySelector(`[onclick="castVote('${myVote}')"]`);if(btn)btn.classList.add('voted');}
+function updateVoteUI(){
+  const total=Object.values(votes).reduce((a,b)=>a+b,0)||1;
+  Object.keys(votes).forEach(k=>{
+    const pct=Math.round(votes[k]/total*100);
+    const bar=document.getElementById('vbar-'+k);
+    const pctEl=document.getElementById('vpct-'+k);
+    if(bar)bar.style.width=pct+'%';
+    if(pctEl)pctEl.textContent=pct+'%';
+  });
+}
+function castVote(key){
+  if(myVote)return;
+  votes[key]=(votes[key]||0)+1;
+  localStorage.setItem('votes',JSON.stringify(votes));
+  localStorage.setItem('myVote',key);
+  const btn=document.querySelector(`[onclick="castVote('${key}')"]`);
+  if(btn)btn.classList.add('voted');
+  updateVoteUI();
+}
+updateVoteUI();
+
+// fan messages
+const fanMsgs=JSON.parse(localStorage.getItem('fanMsgs')||'[]');
+function renderFanMsgs(){
+  const container=document.getElementById('fanMessages');
+  if(fanMsgs.length===0){container.innerHTML='<div style="text-align:center;padding:1rem;font-size:0.7rem;color:var(--muted);letter-spacing:0.2em">Be the first to leave a message 🖤</div>';return;}
+  container.innerHTML=fanMsgs.slice(-10).reverse().map(m=>`<div class="fan-msg"><div class="fan-msg-name">${m.name}</div><div class="fan-msg-text">${m.text}</div></div>`).join('');
+}
+function submitFanMsg(){
+  const name=document.getElementById('fanName').value.trim();
+  const text=document.getElementById('fanMsg').value.trim();
+  if(!name||!text)return;
+  fanMsgs.push({name,text});
+  localStorage.setItem('fanMsgs',JSON.stringify(fanMsgs));
+  document.getElementById('fanName').value='';
+  document.getElementById('fanMsg').value='';
+  renderFanMsgs();
+  showToast('Message sent! 🖤');
+}
+renderFanMsgs();
+
+// films
 const films={
-  scream7:{year:'2026',title:'Scream VII',role:'Sam Carpenter',desc:'The latest installment in the Scream franchise. Jenna reprises her iconic role as Sam Carpenter, the daughter of the original Ghostface killer. Highly anticipated by fans worldwide.',tags:['Horror','Thriller','2026']},
-  wednesday2:{year:'2025',title:'Wednesday — Season 2',role:'Wednesday Addams',desc:'The highly anticipated second season of the Netflix global hit. Jenna returns as the iconic Wednesday Addams at Nevermore Academy, facing darker mysteries and new challenges.',tags:['Netflix','Series','Fantasy','2025']},
-  beetlejuice:{year:'2024',title:'Beetlejuice Beetlejuice',role:'Astrid Deetz',desc:'Tim Burton\'s long-awaited sequel to the 1988 classic. Jenna plays Astrid Deetz, the teenage daughter of Lydia. A massive box office success, earning over $450M worldwide.',tags:['Fantasy','Comedy','Tim Burton','2024']},
-  scream6:{year:'2023',title:'Scream VI',role:'Sam Carpenter',desc:'Set in New York City, Sam and Tara face a new and brutal Ghostface. One of the highest-grossing entries in the franchise, praised for its intense and bold set pieces.',tags:['Horror','Thriller','2023']},
-  wednesday1:{year:'2022',title:'Wednesday',role:'Wednesday Addams',desc:'The breakout role that made Jenna a global superstar. This Netflix series became one of the most-watched shows in history. Her performance was universally acclaimed and won her a Golden Globe nomination.',tags:['Netflix','Series','Horror','2022']},
-  scream5:{year:'2022',title:'Scream',role:'Sam Carpenter',desc:'A legacy sequel to the original Scream trilogy. Jenna stars as Sam Carpenter, revealed to be the biological daughter of Billy Loomis. Her performance was praised as a standout of the film.',tags:['Horror','Thriller','2022']},
-  yesday:{year:'2021',title:'Yes Day',role:'Katie Torres',desc:'A Netflix family comedy starring Jennifer Garner. Jenna plays the eldest daughter Katie, navigating family life when her parents agree to say yes to everything for one day.',tags:['Comedy','Netflix','Family','2021']},
-  you:{year:'2019',title:'You — Season 2',role:'Ellie Alves',desc:'Jenna joined the cast of the hit Netflix thriller as Ellie Alves, a sharp and street-smart teenager. Her performance stood out and earned her wider recognition early in her career.',tags:['Netflix','Thriller','Series','2019']}
+  scream7:{year:'2026',title:'Scream VII',role:'Sam Carpenter',desc:'The latest installment in the Scream franchise. Jenna reprises her iconic role as Sam Carpenter. Highly anticipated by fans worldwide.',tags:['Horror','Thriller','2026']},
+  wednesday2:{year:'2025',title:'Wednesday — Season 2',role:'Wednesday Addams',desc:'The highly anticipated second season of the Netflix global hit. Jenna returns as the iconic Wednesday Addams facing darker mysteries.',tags:['Netflix','Series','Fantasy','2025']},
+  beetlejuice:{year:'2024',title:'Beetlejuice Beetlejuice',role:'Astrid Deetz',desc:'Tim Burton\'s long-awaited sequel. Jenna plays Astrid Deetz, the teenage daughter of Lydia. Earned over $450M worldwide.',tags:['Fantasy','Comedy','Tim Burton','2024']},
+  scream6:{year:'2023',title:'Scream VI',role:'Sam Carpenter',desc:'Set in New York City. Sam and Tara face a new and brutal Ghostface. One of the highest-grossing entries in the franchise.',tags:['Horror','Thriller','2023']},
+  wednesday1:{year:'2022',title:'Wednesday',role:'Wednesday Addams',desc:'The breakout role that made Jenna a global superstar. One of the most-watched Netflix shows in history.',tags:['Netflix','Series','Horror','2022']},
+  scream5:{year:'2022',title:'Scream',role:'Sam Carpenter',desc:'A legacy sequel to the original trilogy. Jenna stars as Sam Carpenter, revealed to be the biological daughter of Billy Loomis.',tags:['Horror','Thriller','2022']},
+  yesday:{year:'2021',title:'Yes Day',role:'Katie Torres',desc:'A Netflix family comedy. Jenna plays the eldest daughter Katie navigating family life.',tags:['Comedy','Netflix','Family','2021']},
+  you:{year:'2019',title:'You — Season 2',role:'Ellie Alves',desc:'Jenna joined the cast as Ellie Alves, a sharp and street-smart teenager. Her performance earned her wider recognition.',tags:['Netflix','Thriller','Series','2019']}
 };
-
 function openFilm(id){
   const f=films[id];
   document.getElementById('fYear').textContent=f.year;
@@ -332,10 +507,10 @@ function openFilm(id){
 }
 function closeFilm(){document.getElementById('filmModal').classList.remove('active');}
 
+// supabase likes
 async function getLikes(photoId){
   const r=await fetch(`${SUPABASE_URL}/rest/v1/likes?photo_id=eq.${photoId}&select=count`,{headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}});
-  const d=await r.json();
-  return d.length>0?d[0].count:0;
+  const d=await r.json();return d.length>0?d[0].count:0;
 }
 async function addLike(photoId){
   const r=await fetch(`${SUPABASE_URL}/rest/v1/likes?photo_id=eq.${photoId}`,{headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}});
@@ -357,6 +532,7 @@ async function toggleLike(photoId){
   const newCount=await getLikes(photoId);
   countEl.textContent=newCount;
   updateTopBadges();
+  updateHallOfFame();
 }
 async function toggleLightboxLike(){
   if(!currentPhoto)return;
@@ -367,6 +543,26 @@ async function toggleLightboxLike(){
   if(liked[currentPhoto])lbBtn.classList.add('liked');
   else lbBtn.classList.remove('liked');
 }
+
+// hall of fame
+const photoSrcs={};
+document.querySelectorAll('.grid-item img').forEach(img=>{
+  const id=img.closest('.grid-item').querySelector('.like-btn')?.id?.replace('like-','');
+  if(id)photoSrcs[id]=img.src;
+});
+function updateHallOfFame(){
+  const counts=[];
+  document.querySelectorAll('.like-count').forEach(el=>{
+    const id=el.id.replace('count-','');
+    counts.push({id,count:parseInt(el.textContent)||0,src:photoSrcs[id]||''});
+  });
+  counts.sort((a,b)=>b.count-a.count);
+  const top3=counts.slice(0,3).filter(x=>x.count>0);
+  const hall=document.getElementById('hallGrid');
+  if(top3.length===0){hall.innerHTML='<div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.7rem;letter-spacing:0.2em;grid-column:1/-1">Like photos to see the top 3 here 🖤</div>';return;}
+  hall.innerHTML=top3.map((p,i)=>`<div class="hall-item" onclick="openLightbox('${p.src}','${p.id}')"><img src="${p.src}" alt="Top ${i+1}"><div class="hall-rank">${['①','②','③'][i]}</div><div class="hall-likes">♥ ${p.count}</div></div>`).join('');
+}
+
 async function loadAllLikes(){
   const r=await fetch(`${SUPABASE_URL}/rest/v1/likes?select=photo_id,count`,{headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}});
   const d=await r.json();
@@ -376,13 +572,11 @@ async function loadAllLikes(){
     if(liked[item.photo_id]){const btn=document.getElementById('like-'+item.photo_id);if(btn)btn.classList.add('liked');}
   });
   updateTopBadges();
+  updateHallOfFame();
 }
 function updateTopBadges(){
   const counts=[];
-  document.querySelectorAll('.like-count').forEach(el=>{
-    const id=el.id.replace('count-','');
-    counts.push({id,count:parseInt(el.textContent)||0});
-  });
+  document.querySelectorAll('.like-count').forEach(el=>{counts.push({id:el.id.replace('count-',''),count:parseInt(el.textContent)||0});});
   counts.sort((a,b)=>b.count-a.count);
   const top3=counts.slice(0,3).filter(x=>x.count>0).map(x=>x.id);
   document.querySelectorAll('.top-badge').forEach(el=>el.classList.remove('show'));
@@ -402,18 +596,17 @@ function openLightbox(src,photoId){
 function closeLightbox(){document.getElementById('lightbox').classList.remove('active');currentPhoto=null;}
 document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
 
-function sharePhoto(){
-  navigator.clipboard.writeText(window.location.href).then(()=>{
-    const t=document.getElementById('toast');
-    t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'),2000);
-  });
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
 }
+function sharePhoto(){navigator.clipboard.writeText(window.location.href).then(()=>showToast('Link copied!'));}
+function copyLink(){navigator.clipboard.writeText('https://orteganoirpage.github.io/ortega-noir').then(()=>showToast('Link copied!'));}
 
 const container=document.getElementById('particles');
 for(let i=0;i<20;i++){
-  const p=document.createElement('div');
-  p.className='particle';
+  const p=document.createElement('div');p.className='particle';
   p.style.left=Math.random()*100+'%';
   p.style.animationDuration=(8+Math.random()*12)+'s';
   p.style.animationDelay=(Math.random()*10)+'s';
@@ -422,8 +615,7 @@ for(let i=0;i<20;i++){
 }
 const music=document.getElementById('bgmusic');
 const btn=document.getElementById('musicBtn');
-let playing=false;
-music.volume=0.15;
+let playing=false;music.volume=0.15;
 document.addEventListener('click',()=>{if(!playing){music.play();playing=true;}},{once:true});
 btn.addEventListener('click',e=>{
   e.stopPropagation();
