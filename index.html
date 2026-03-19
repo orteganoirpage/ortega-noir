@@ -6,11 +6,13 @@
 <title>ortega.noir</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#f5f0e8;--black:#0a0a0a;--black2:#141414;--gold:#c8a97e;--muted:#7a7060}
+:root{--cream:#f5f0e8;--black:#0a0a0a;--black2:#141414;--gold:#c8a97e;--muted:#7a7060;--pink:#e84393}
 body.light{--cream:#1a1a1a;--black:#f5f0e8;--black2:#e8e0d0;--gold:#8a6a3e;--muted:#6a5a48}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--cream);font-family:'Raleway',sans-serif;font-weight:300;transition:background 0.3s,color 0.3s}
+
+/* NAV */
 nav{position:fixed;top:0;width:100%;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.97);z-index:100;border-bottom:1px solid rgba(200,169,126,0.08)}
 body.light nav{background:rgba(245,240,232,0.97)}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase}
@@ -20,6 +22,108 @@ body.light nav{background:rgba(245,240,232,0.97)}
 @media(max-width:600px){nav{padding:0.8rem 1rem}.nav-logo{font-size:1rem}.nav-links{gap:0.5rem}.nav-links a{font-size:0.48rem}}
 .icon-btn{background:none;border:1px solid rgba(200,169,126,0.3);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;color:var(--gold);font-size:0.75rem;flex-shrink:0}
 .icon-btn:hover{border-color:var(--gold)}
+.auth-nav-btn{background:none;border:1px solid rgba(200,169,126,0.3);border-radius:1px;padding:0.3rem 0.8rem;font-family:'Raleway',sans-serif;font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);cursor:pointer;transition:all 0.3s}
+.auth-nav-btn:hover{background:rgba(200,169,126,0.08);border-color:var(--gold)}
+.user-nav{display:flex;align-items:center;gap:0.6rem}
+.user-nav-avatar{width:26px;height:26px;border-radius:50%;object-fit:cover;border:1px solid rgba(200,169,126,0.4);cursor:pointer}
+.user-nav-name{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);cursor:pointer}
+.user-nav-logout{background:none;border:none;font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:color 0.3s}
+.user-nav-logout:hover{color:var(--pink)}
+
+/* AUTH MODAL */
+.auth-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:500;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.auth-overlay.open{opacity:1;pointer-events:all}
+.auth-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-60%);width:92%;max-width:420px;background:var(--black2);border:1px solid rgba(200,169,126,0.2);padding:2rem;z-index:501;opacity:0;pointer-events:none;transition:all 0.35s;max-height:90vh;overflow-y:auto}
+.auth-modal.open{opacity:1;pointer-events:all;transform:translate(-50%,-50%)}
+.auth-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.auth-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase}
+.auth-close{background:none;border:none;color:var(--muted);font-size:1rem;cursor:pointer;transition:color 0.3s}
+.auth-close:hover{color:var(--cream)}
+.auth-tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:1px solid rgba(200,169,126,0.1)}
+.auth-tab{flex:1;background:none;border:none;padding:0.6rem;font-family:'Raleway',sans-serif;font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all 0.3s;border-bottom:2px solid transparent}
+.auth-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.auth-form{display:flex;flex-direction:column;gap:0.8rem}
+.auth-input{background:var(--black);border:1px solid rgba(200,169,126,0.15);padding:0.7rem 1rem;font-family:'Raleway',sans-serif;font-size:0.72rem;color:var(--cream);outline:none;transition:border 0.3s;width:100%}
+.auth-input:focus{border-color:var(--gold)}
+.auth-input::placeholder{color:var(--muted)}
+.auth-btn{background:var(--gold);color:var(--black);border:none;padding:0.8rem;font-family:'Raleway',sans-serif;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-weight:500;margin-top:0.3rem}
+.auth-btn:hover{opacity:0.85}
+.auth-switch{font-size:0.62rem;color:var(--muted);text-align:center;margin-top:0.3rem}
+.auth-switch span{color:var(--gold);cursor:pointer;text-decoration:underline}
+.avatar-upload{width:80px;height:80px;border-radius:50%;border:2px dashed rgba(200,169,126,0.3);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;margin:0 auto 0.5rem;overflow:hidden;transition:border-color 0.3s;font-size:1.5rem;color:var(--muted);gap:0.2rem;flex-shrink:0}
+.avatar-upload:hover{border-color:var(--gold)}
+.avatar-upload small{font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+
+/* COMMENTS MODAL */
+.comments-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:400;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.comments-overlay.open{opacity:1;pointer-events:all}
+.comments-modal{position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);width:100%;max-width:600px;background:var(--black2);border-top:1px solid rgba(200,169,126,0.15);border-left:1px solid rgba(200,169,126,0.08);border-right:1px solid rgba(200,169,126,0.08);z-index:401;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);max-height:70vh;display:flex;flex-direction:column}
+.comments-modal.open{transform:translateX(-50%) translateY(0)}
+.comments-header{padding:1rem 1.5rem;border-bottom:1px solid rgba(200,169,126,0.08);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.comments-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--cream)}
+.comments-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.9rem}
+.comments-list{flex:1;overflow-y:auto;padding:1rem 1.5rem;display:flex;flex-direction:column;gap:0.8rem}
+.comment-item{display:flex;gap:0.8rem;align-items:flex-start}
+.comment-avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;border:1px solid rgba(200,169,126,0.2);flex-shrink:0;background:var(--black);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--gold)}
+.comment-body{flex:1}
+.comment-username{font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.2rem}
+.comment-text{font-size:0.75rem;color:var(--muted);line-height:1.7}
+.comment-time{font-size:0.5rem;color:rgba(122,112,96,0.5);margin-top:0.2rem;letter-spacing:0.1em}
+.comments-empty{text-align:center;padding:2rem;font-size:0.65rem;color:var(--muted);letter-spacing:0.2em}
+.comments-input-wrap{padding:1rem 1.5rem;border-top:1px solid rgba(200,169,126,0.08);display:flex;gap:0.6rem;align-items:center;flex-shrink:0}
+.comments-input{flex:1;background:var(--black);border:1px solid rgba(200,169,126,0.15);padding:0.6rem 1rem;font-family:'Raleway',sans-serif;font-size:0.72rem;color:var(--cream);outline:none;transition:border 0.3s}
+.comments-input:focus{border-color:var(--gold)}
+.comments-input::placeholder{color:var(--muted)}
+.comments-send{background:var(--gold);color:var(--black);border:none;padding:0.6rem 1rem;font-family:'Raleway',sans-serif;font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:opacity 0.3s;font-weight:500}
+.comments-send:hover{opacity:0.85}
+.comments-login-msg{padding:1rem 1.5rem;text-align:center;font-size:0.65rem;color:var(--muted);border-top:1px solid rgba(200,169,126,0.08)}
+.comments-login-msg span{color:var(--gold);cursor:pointer;text-decoration:underline}
+
+/* MESSAGES MODAL */
+.messages-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:400;opacity:0;pointer-events:none;transition:opacity 0.3s}
+.messages-overlay.open{opacity:1;pointer-events:all}
+.messages-modal{position:fixed;top:50%;right:-500px;width:380px;height:80vh;background:var(--black2);border:1px solid rgba(200,169,126,0.15);z-index:401;transition:right 0.4s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column}
+.messages-modal.open{right:1rem;top:50%;transform:translateY(-50%)}
+@media(max-width:500px){.messages-modal{width:95%;right:-100%;}.messages-modal.open{right:2.5%;}}
+.messages-header{padding:1rem 1.5rem;border-bottom:1px solid rgba(200,169,126,0.08);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.messages-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--cream)}
+.messages-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.9rem}
+.messages-search{padding:0.8rem 1.5rem;border-bottom:1px solid rgba(200,169,126,0.08);flex-shrink:0}
+.messages-search-input{width:100%;background:var(--black);border:1px solid rgba(200,169,126,0.15);padding:0.5rem 0.8rem;font-family:'Raleway',sans-serif;font-size:0.68rem;color:var(--cream);outline:none;transition:border 0.3s}
+.messages-search-input:focus{border-color:var(--gold)}
+.messages-search-input::placeholder{color:var(--muted)}
+.search-results{padding:0 1.5rem;flex-shrink:0}
+.search-result-item{display:flex;align-items:center;gap:0.8rem;padding:0.6rem 0;border-bottom:1px solid rgba(200,169,126,0.05);cursor:pointer;transition:opacity 0.2s}
+.search-result-item:hover{opacity:0.7}
+.search-result-avatar{width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--black);border:1px solid rgba(200,169,126,0.2);display:flex;align-items:center;justify-content:center;font-size:0.7rem;color:var(--gold);flex-shrink:0}
+.search-result-name{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream)}
+.conv-list{flex:1;overflow-y:auto;padding:0.5rem 0}
+.conv-item{display:flex;align-items:center;gap:0.8rem;padding:0.8rem 1.5rem;cursor:pointer;transition:background 0.2s;border-bottom:1px solid rgba(200,169,126,0.04)}
+.conv-item:hover{background:rgba(200,169,126,0.04)}
+.conv-item.active{background:rgba(200,169,126,0.08)}
+.conv-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;background:var(--black);border:1px solid rgba(200,169,126,0.2);display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:var(--gold);flex-shrink:0}
+.conv-info{flex:1;min-width:0}
+.conv-name{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream);margin-bottom:0.2rem}
+.conv-last{font-size:0.62rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.conv-unread{background:var(--gold);color:var(--black);border-radius:50%;width:16px;height:16px;font-size:0.5rem;display:flex;align-items:center;justify-content:center;font-weight:500;flex-shrink:0}
+.chat-view{display:none;flex-direction:column;flex:1;overflow:hidden}
+.chat-view.active{display:flex}
+.chat-header{padding:0.8rem 1.5rem;border-bottom:1px solid rgba(200,169,126,0.08);display:flex;align-items:center;gap:0.8rem;flex-shrink:0}
+.chat-back{background:none;border:none;color:var(--gold);cursor:pointer;font-size:0.8rem}
+.chat-user-name{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream)}
+.chat-messages{flex:1;overflow-y:auto;padding:1rem 1.5rem;display:flex;flex-direction:column;gap:0.6rem}
+.chat-msg{max-width:75%;padding:0.6rem 0.9rem;font-size:0.72rem;line-height:1.6}
+.chat-msg.sent{background:var(--gold);color:var(--black);align-self:flex-end;border-radius:1px 1px 0 1px}
+.chat-msg.received{background:var(--black);color:var(--cream);align-self:flex-start;border:1px solid rgba(200,169,126,0.1);border-radius:1px 1px 1px 0}
+.chat-msg-time{font-size:0.48rem;opacity:0.6;margin-top:0.2rem;letter-spacing:0.1em}
+.chat-input-wrap{padding:0.8rem 1.5rem;border-top:1px solid rgba(200,169,126,0.08);display:flex;gap:0.5rem;flex-shrink:0}
+.chat-input{flex:1;background:var(--black);border:1px solid rgba(200,169,126,0.15);padding:0.5rem 0.8rem;font-family:'Raleway',sans-serif;font-size:0.68rem;color:var(--cream);outline:none;transition:border 0.3s}
+.chat-input:focus{border-color:var(--gold)}
+.chat-send{background:var(--gold);color:var(--black);border:none;padding:0.5rem 0.8rem;cursor:pointer;font-size:0.8rem;transition:opacity 0.3s}
+.chat-send:hover{opacity:0.85}
+.conv-empty{padding:2rem;text-align:center;font-size:0.65rem;color:var(--muted);letter-spacing:0.15em}
+
+/* HERO */
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,#1a1510 0%,#0a0a0a 70%)}
 body.light .hero-bg{background:radial-gradient(ellipse at center,#e8d5b0 0%,#f5f0e8 70%)}
@@ -37,18 +141,22 @@ body.light .hero-bg{background:radial-gradient(ellipse at center,#e8d5b0 0%,#f5f
 .hero-stat-label{font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted)}
 .hero-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);margin:1.8rem auto 0;opacity:0;animation:fadeUp 1s 1.2s forwards}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* COUNTDOWN */
 .countdown-bar{background:var(--black2);border-bottom:1px solid rgba(200,169,126,0.08);padding:0.8rem 2rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
 .countdown-label{font-size:0.58rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted)}
 .countdown-units{display:flex;gap:1rem;align-items:center}
 .countdown-unit{text-align:center}
 .countdown-num{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);line-height:1}
 .countdown-unit-label{font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
+
+/* SECTIONS */
 .section-wrap{padding:2.5rem 1.5rem;max-width:1200px;margin:0 auto}
 @media(max-width:600px){.section-wrap{padding:2rem 1rem}}
 .section-header{text-align:center;margin-bottom:2rem}
 .section-label{font-size:0.58rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,4vw,2.2rem);font-weight:300;color:var(--cream)}
-.hall-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;max-width:800px;margin:0 auto 0}
+.hall-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;max-width:800px;margin:0 auto}
 @media(max-width:600px){.hall-grid{grid-template-columns:1fr}}
 .hall-item{position:relative;overflow:hidden;border-radius:2px;aspect-ratio:3/4;cursor:pointer;border:1px solid rgba(200,169,126,0.3)}
 .hall-item img{width:100%;height:100%;object-fit:cover;filter:sepia(8%) brightness(0.9)}
@@ -66,13 +174,20 @@ body.light .hero-bg{background:radial-gradient(ellipse at center,#e8d5b0 0%,#f5f
 .grid-item:hover .grid-overlay{background:rgba(10,10,10,0.55)}
 .grid-tag{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream);opacity:0;transform:translateY(6px);transition:all 0.3s 0.1s}
 .grid-item:hover .grid-tag{opacity:0.9;transform:translateY(0)}
-.like-btn{background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;opacity:0;transition:all 0.3s 0.1s;transform:translateY(6px);padding:0}
-.grid-item:hover .like-btn{opacity:1;transform:translateY(0)}
+.grid-actions{display:flex;gap:6px;align-items:center;opacity:0;transition:all 0.3s 0.1s;transform:translateY(6px)}
+.grid-item:hover .grid-actions{opacity:1;transform:translateY(0)}
+.like-btn{background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;padding:0}
 .like-btn svg{width:16px;height:16px;transition:transform 0.2s}
 .like-btn:hover svg{transform:scale(1.2)}
-.like-btn.liked svg{fill:#e84393}
-.like-btn.liked path{stroke:#e84393}
+.like-btn.liked svg{fill:var(--pink)}
+.like-btn.liked path{stroke:var(--pink)}
 .like-count{font-size:0.55rem;color:var(--cream);letter-spacing:0.1em}
+.comment-btn{background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;padding:0;color:var(--cream)}
+.comment-btn svg{width:15px;height:15px}
+.comment-btn:hover svg{transform:scale(1.1)}
+.share-photo-btn{background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;padding:0;color:var(--cream)}
+.share-photo-btn svg{width:15px;height:15px}
+.share-photo-btn:hover svg{transform:scale(1.1)}
 .top-badge{position:absolute;top:0.5rem;left:0.5rem;background:var(--gold);color:#0a0a0a;font-size:0.5rem;letter-spacing:0.15em;padding:2px 6px;border-radius:1px;font-family:'Raleway',sans-serif;text-transform:uppercase;opacity:0;transition:opacity 0.3s}
 .top-badge.show{opacity:1}
 .credit-bar{text-align:center;padding:0.8rem 0 1rem;font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted)}
@@ -88,7 +203,7 @@ body.light .hero-bg{background:radial-gradient(ellipse at center,#e8d5b0 0%,#f5f
 .vote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.8rem;max-width:900px;margin:2rem auto 0}
 .vote-btn{background:var(--black2);border:1px solid rgba(200,169,126,0.15);border-radius:2px;padding:1rem;cursor:pointer;text-align:left;transition:border-color 0.3s;font-family:'Raleway',sans-serif}
 .vote-btn:hover{border-color:var(--gold)}
-.vote-btn.voted{border-color:#e84393}
+.vote-btn.voted{border-color:var(--pink)}
 .vote-title{font-family:'Cormorant Garamond',serif;font-size:0.95rem;color:var(--cream);margin-bottom:0.3rem}
 .vote-year{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)}
 .vote-bar-wrap{margin-top:0.6rem;background:rgba(200,169,126,0.1);border-radius:1px;height:3px}
@@ -137,12 +252,12 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
 .lightbox img{max-width:92vw;max-height:80vh;object-fit:contain;border-radius:2px}
 .lightbox-close{position:absolute;top:1.5rem;right:1.5rem;font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--muted);cursor:pointer}
 .lightbox-close:hover{color:var(--cream)}
-.lightbox-actions{display:flex;gap:0.8rem;align-items:center}
+.lightbox-actions{display:flex;gap:0.8rem;align-items:center;flex-wrap:wrap;justify-content:center}
 .lightbox-like{display:flex;align-items:center;gap:8px;cursor:pointer;background:none;border:1px solid rgba(200,169,126,0.3);padding:0.5rem 1.2rem;border-radius:1px;color:var(--cream);font-family:'Raleway',sans-serif;font-size:0.65rem;letter-spacing:0.2em;transition:all 0.3s}
 .lightbox-like:hover{border-color:var(--gold)}
-.lightbox-like.liked{border-color:#e84393;color:#e84393}
-.lightbox-share{display:flex;align-items:center;gap:8px;cursor:pointer;background:none;border:1px solid rgba(200,169,126,0.3);padding:0.5rem 1.2rem;border-radius:1px;color:var(--cream);font-family:'Raleway',sans-serif;font-size:0.65rem;letter-spacing:0.2em;transition:all 0.3s}
-.lightbox-share:hover{border-color:var(--gold);color:var(--gold)}
+.lightbox-like.liked{border-color:var(--pink);color:var(--pink)}
+.lightbox-action-btn{display:flex;align-items:center;gap:8px;cursor:pointer;background:none;border:1px solid rgba(200,169,126,0.3);padding:0.5rem 1.2rem;border-radius:1px;color:var(--cream);font-family:'Raleway',sans-serif;font-size:0.65rem;letter-spacing:0.2em;transition:all 0.3s}
+.lightbox-action-btn:hover{border-color:var(--gold);color:var(--gold)}
 .back-top{position:fixed;bottom:2rem;right:2rem;background:var(--gold);color:#0a0a0a;border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;opacity:0;transition:opacity 0.3s;z-index:99}
 .back-top.show{opacity:1}
 .toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--gold);color:#0a0a0a;padding:0.5rem 1.2rem;border-radius:1px;font-size:0.65rem;letter-spacing:0.2em;opacity:0;transition:all 0.3s;z-index:999;pointer-events:none}
@@ -151,14 +266,23 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
 </head>
 <body>
 <audio id="bgmusic" src="musica.mp3" loop></audio>
+
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <span class="lightbox-close" onclick="closeLightbox()">close ✕</span>
   <img id="lightbox-img" src="" alt="">
   <div class="lightbox-actions">
-    <button class="lightbox-like" id="lightbox-like-btn" onclick="toggleLightboxLike()"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span id="lightbox-like-count">0</span></button>
-    <button class="lightbox-share" onclick="sharePhoto()">Copy link</button>
+    <button class="lightbox-like" id="lightbox-like-btn" onclick="toggleLightboxLike()">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span id="lightbox-like-count">0</span>
+    </button>
+    <button class="lightbox-action-btn" onclick="openCommentsFromLightbox()">💬 Comments</button>
+    <button class="lightbox-action-btn" onclick="shareCurrentPhoto()">↗ Share</button>
+    <button class="lightbox-action-btn" onclick="copyPhotoLink()">🔗 Copy link</button>
   </div>
 </div>
+
+<!-- FILM MODAL -->
 <div class="film-modal" id="filmModal" onclick="if(event.target===this)closeFilm()">
   <div class="film-modal-inner">
     <span class="film-modal-close" onclick="closeFilm()">close ✕</span>
@@ -169,9 +293,89 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
     <div class="film-modal-tags" id="fTags"></div>
   </div>
 </div>
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<div class="toast" id="toast">Copied!</div>
 
+<!-- AUTH OVERLAY + MODAL -->
+<div class="auth-overlay" id="authOverlay" onclick="closeAuth()"></div>
+<div class="auth-modal" id="authModal">
+  <div class="auth-header">
+    <div class="auth-logo">ortega.noir</div>
+    <button class="auth-close" onclick="closeAuth()">✕</button>
+  </div>
+  <div class="auth-tabs">
+    <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+    <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Join</button>
+  </div>
+  <div class="auth-form" id="form-login">
+    <input class="auth-input" id="login-email" type="email" placeholder="Email">
+    <input class="auth-input" id="login-password" type="password" placeholder="Password">
+    <button class="auth-btn" onclick="login()">Sign In →</button>
+    <div class="auth-switch">No account? <span onclick="switchTab('register')">Join now</span></div>
+  </div>
+  <div class="auth-form" id="form-register" style="display:none">
+    <div class="avatar-upload" onclick="document.getElementById('avatarInput').click()">
+      <img id="avatarPreview" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%">
+      <span id="avatarPlaceholder">📷<br><small>Photo</small></span>
+      <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="previewAvatar(this)">
+    </div>
+    <input class="auth-input" id="reg-username" type="text" placeholder="@username" maxlength="20">
+    <input class="auth-input" id="reg-email" type="email" placeholder="Email">
+    <input class="auth-input" id="reg-password" type="password" placeholder="Password">
+    <textarea class="auth-input" id="reg-bio" placeholder="Short bio... (ex: Jenna fan since 2019 🖤)" rows="2" maxlength="100" style="resize:none"></textarea>
+    <button class="auth-btn" onclick="register()">Create Account →</button>
+    <div class="auth-switch">Already have an account? <span onclick="switchTab('login')">Sign in</span></div>
+  </div>
+</div>
+
+<!-- COMMENTS MODAL -->
+<div class="comments-overlay" id="commentsOverlay" onclick="closeComments()"></div>
+<div class="comments-modal" id="commentsModal">
+  <div class="comments-header">
+    <div class="comments-title">Comments</div>
+    <button class="comments-close" onclick="closeComments()">✕</button>
+  </div>
+  <div class="comments-list" id="commentsList"></div>
+  <div id="commentsInputArea">
+    <div class="comments-input-wrap" id="commentsInputWrap" style="display:none">
+      <input class="comments-input" id="commentInput" placeholder="Add a comment..." maxlength="200">
+      <button class="comments-send" onclick="sendComment()">Send</button>
+    </div>
+    <div class="comments-login-msg" id="commentsLoginMsg">
+      <span onclick="closeComments();openAuth()">Sign in</span> to leave a comment 🖤
+    </div>
+  </div>
+</div>
+
+<!-- MESSAGES MODAL -->
+<div class="messages-overlay" id="messagesOverlay" onclick="closeMessages()"></div>
+<div class="messages-modal" id="messagesModal">
+  <div class="messages-header">
+    <div class="messages-title">Messages</div>
+    <button class="messages-close" onclick="closeMessages()">✕</button>
+  </div>
+  <div class="messages-search">
+    <input class="messages-search-input" id="userSearchInput" placeholder="Search users..." oninput="searchUsers(this.value)">
+  </div>
+  <div class="search-results" id="searchResults"></div>
+  <div id="convListView">
+    <div class="conv-list" id="convList"></div>
+  </div>
+  <div class="chat-view" id="chatView">
+    <div class="chat-header">
+      <button class="chat-back" onclick="backToConvList()">←</button>
+      <div class="chat-user-name" id="chatUserName"></div>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-wrap">
+      <input class="chat-input" id="chatInput" placeholder="Message..." onkeydown="if(event.key==='Enter')sendMessage()">
+      <button class="chat-send" onclick="sendMessage()">↑</button>
+    </div>
+  </div>
+</div>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="toast" id="toast"></div>
+
+<!-- NAVBAR -->
 <nav>
   <div class="nav-logo">ortega.noir</div>
   <div class="nav-links">
@@ -184,9 +388,13 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
     <a href="https://www.instagram.com/ortega.noir" target="_blank">Instagram</a>
     <button class="icon-btn" id="themeBtn">☀</button>
     <button class="icon-btn" id="musicBtn">♪</button>
+    <div id="authArea">
+      <button class="auth-nav-btn" onclick="openAuth()">Join</button>
+    </div>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-particles" id="particles"></div>
@@ -232,18 +440,7 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
     <div class="section-label">Gallery</div>
     <h2 class="section-title">Photos</h2>
   </div>
-  <div class="grid-3">
-    <div class="grid-item" onclick="openLightbox('fotos/casual1.jpg','casual1')"><img src="fotos/casual1.jpg" alt="Jenna"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-casual1" onclick="event.stopPropagation();toggleLike('casual1')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-casual1">0</span></button></div><div class="top-badge" id="top-casual1">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/casual2.jpg','casual2')"><img src="fotos/casual2.jpg" alt="Jenna"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-casual2" onclick="event.stopPropagation();toggleLike('casual2')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-casual2">0</span></button></div><div class="top-badge" id="top-casual2">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/casual3.jpg','casual3')"><img src="fotos/casual3.jpg" alt="Jenna"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-casual3" onclick="event.stopPropagation();toggleLike('casual3')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-casual3">0</span></button></div><div class="top-badge" id="top-casual3">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/casual4.jpg','casual4')"><img src="fotos/casual4.jpg" alt="Jenna"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-casual4" onclick="event.stopPropagation();toggleLike('casual4')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-casual4">0</span></button></div><div class="top-badge" id="top-casual4">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/casual5.jpg','casual5')"><img src="fotos/casual5.jpg" alt="Jenna"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-casual5" onclick="event.stopPropagation();toggleLike('casual5')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-casual5">0</span></button></div><div class="top-badge" id="top-casual5">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/casual6.jpg','casual6')"><img src="fotos/casual6.jpg" alt="Jenna"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-casual6" onclick="event.stopPropagation();toggleLike('casual6')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-casual6">0</span></button></div><div class="top-badge" id="top-casual6">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/casual7.jpg','casual7')"><img src="fotos/casual7.jpg" alt="Jenna"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-casual7" onclick="event.stopPropagation();toggleLike('casual7')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-casual7">0</span></button></div><div class="top-badge" id="top-casual7">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/casual8.jpg','casual8')"><img src="fotos/casual8.jpg" alt="Jenna"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-casual8" onclick="event.stopPropagation();toggleLike('casual8')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-casual8">0</span></button></div><div class="top-badge" id="top-casual8">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/casual9.jpg','casual9')"><img src="fotos/casual9.jpg" alt="Jenna"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-casual9" onclick="event.stopPropagation();toggleLike('casual9')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-casual9">0</span></button></div><div class="top-badge" id="top-casual9">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/casual10.jpg','casual10')"><img src="fotos/casual10.jpg" alt="Jenna"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-casual10" onclick="event.stopPropagation();toggleLike('casual10')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-casual10">0</span></button></div><div class="top-badge" id="top-casual10">Top</div></div>
-  </div>
+  <div class="grid-3" id="photosGrid"></div>
 </section>
 
 <hr class="divider">
@@ -253,31 +450,7 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
     <div class="section-label">Latest</div>
     <h2 class="section-title">Updates</h2>
   </div>
-  <div class="grid-4">
-    <div class="grid-item" onclick="openLightbox('fotos/update1.jpg','update1')"><img src="fotos/update1.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update1" onclick="event.stopPropagation();toggleLike('update1')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update1">0</span></button></div><div class="top-badge" id="top-update1">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update2.jpg','update2')"><img src="fotos/update2.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update2" onclick="event.stopPropagation();toggleLike('update2')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update2">0</span></button></div><div class="top-badge" id="top-update2">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update3.jpg','update3')"><img src="fotos/update3.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update3" onclick="event.stopPropagation();toggleLike('update3')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update3">0</span></button></div><div class="top-badge" id="top-update3">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update4.jpg','update4')"><img src="fotos/update4.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update4" onclick="event.stopPropagation();toggleLike('update4')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update4">0</span></button></div><div class="top-badge" id="top-update4">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update5.jpg','update5')"><img src="fotos/update5.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update5" onclick="event.stopPropagation();toggleLike('update5')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update5">0</span></button></div><div class="top-badge" id="top-update5">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update6.jpg','update6')"><img src="fotos/update6.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update6" onclick="event.stopPropagation();toggleLike('update6')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update6">0</span></button></div><div class="top-badge" id="top-update6">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update7.jpg','update7')"><img src="fotos/update7.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update7" onclick="event.stopPropagation();toggleLike('update7')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update7">0</span></button></div><div class="top-badge" id="top-update7">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update8.jpg','update8')"><img src="fotos/update8.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update8" onclick="event.stopPropagation();toggleLike('update8')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update8">0</span></button></div><div class="top-badge" id="top-update8">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update9.jpg','update9')"><img src="fotos/update9.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update9" onclick="event.stopPropagation();toggleLike('update9')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update9">0</span></button></div><div class="top-badge" id="top-update9">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update10.jpg','update10')"><img src="fotos/update10.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update10" onclick="event.stopPropagation();toggleLike('update10')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update10">0</span></button></div><div class="top-badge" id="top-update10">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update11.jpg','update11')"><img src="fotos/update11.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update11" onclick="event.stopPropagation();toggleLike('update11')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update11">0</span></button></div><div class="top-badge" id="top-update11">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update12.jpg','update12')"><img src="fotos/update12.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update12" onclick="event.stopPropagation();toggleLike('update12')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update12">0</span></button></div><div class="top-badge" id="top-update12">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update13.jpg','update13')"><img src="fotos/update13.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update13" onclick="event.stopPropagation();toggleLike('update13')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update13">0</span></button></div><div class="top-badge" id="top-update13">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update14.jpg','update14')"><img src="fotos/update14.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update14" onclick="event.stopPropagation();toggleLike('update14')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update14">0</span></button></div><div class="top-badge" id="top-update14">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update15.jpg','update15')"><img src="fotos/update15.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update15" onclick="event.stopPropagation();toggleLike('update15')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update15">0</span></button></div><div class="top-badge" id="top-update15">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update16.jpg','update16')"><img src="fotos/update16.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update16" onclick="event.stopPropagation();toggleLike('update16')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update16">0</span></button></div><div class="top-badge" id="top-update16">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update17.jpg','update17')"><img src="fotos/update17.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update17" onclick="event.stopPropagation();toggleLike('update17')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update17">0</span></button></div><div class="top-badge" id="top-update17">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update18.jpg','update18')"><img src="fotos/update18.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update18" onclick="event.stopPropagation();toggleLike('update18')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update18">0</span></button></div><div class="top-badge" id="top-update18">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update19.jpg','update19')"><img src="fotos/update19.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update19" onclick="event.stopPropagation();toggleLike('update19')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update19">0</span></button></div><div class="top-badge" id="top-update19">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update20.jpg','update20')"><img src="fotos/update20.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update20" onclick="event.stopPropagation();toggleLike('update20')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update20">0</span></button></div><div class="top-badge" id="top-update20">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update21.jpg','update21')"><img src="fotos/update21.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update21" onclick="event.stopPropagation();toggleLike('update21')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update21">0</span></button></div><div class="top-badge" id="top-update21">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update22.jpg','update22')"><img src="fotos/update22.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update22" onclick="event.stopPropagation();toggleLike('update22')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update22">0</span></button></div><div class="top-badge" id="top-update22">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/update23.jpg','update23')"><img src="fotos/update23.jpg" alt="Update"><div class="grid-overlay"><div class="grid-tag">Jenna Ortega</div><button class="like-btn" id="like-update23" onclick="event.stopPropagation();toggleLike('update23')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-update23">0</span></button></div><div class="top-badge" id="top-update23">Top</div></div>
-  </div>
+  <div class="grid-4" id="updatesGrid"></div>
 </section>
 
 <hr class="divider">
@@ -287,18 +460,7 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
     <div class="section-label">Words</div>
     <h2 class="section-title">Quotes</h2>
   </div>
-  <div class="grid-3">
-    <div class="grid-item" onclick="openLightbox('fotos/quote1.jpg','quote1')"><img src="fotos/quote1.jpg" alt="Quote"><div class="grid-overlay"><div class="grid-tag">@jennaortegaspot</div><button class="like-btn" id="like-quote1" onclick="event.stopPropagation();toggleLike('quote1')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-quote1">0</span></button></div><div class="top-badge" id="top-quote1">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/quote2.jpg','quote2')"><img src="fotos/quote2.jpg" alt="Quote"><div class="grid-overlay"><div class="grid-tag">@jennaortegaspot</div><button class="like-btn" id="like-quote2" onclick="event.stopPropagation();toggleLike('quote2')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-quote2">0</span></button></div><div class="top-badge" id="top-quote2">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/quote3.jpg','quote3')"><img src="fotos/quote3.jpg" alt="Quote"><div class="grid-overlay"><div class="grid-tag">@jennaortegaspot</div><button class="like-btn" id="like-quote3" onclick="event.stopPropagation();toggleLike('quote3')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-quote3">0</span></button></div><div class="top-badge" id="top-quote3">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/quote4.jpg','quote4')"><img src="fotos/quote4.jpg" alt="Quote"><div class="grid-overlay"><div class="grid-tag">@jennaortegaspot</div><button class="like-btn" id="like-quote4" onclick="event.stopPropagation();toggleLike('quote4')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-quote4">0</span></button></div><div class="top-badge" id="top-quote4">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/quote5.jpg','quote5')"><img src="fotos/quote5.jpg" alt="Quote"><div class="grid-overlay"><div class="grid-tag">@jennaortegaspot</div><button class="like-btn" id="like-quote5" onclick="event.stopPropagation();toggleLike('quote5')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-quote5">0</span></button></div><div class="top-badge" id="top-quote5">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/quote6.jpg','quote6')"><img src="fotos/quote6.jpg" alt="Quote"><div class="grid-overlay"><div class="grid-tag">@jennaortegaspot</div><button class="like-btn" id="like-quote6" onclick="event.stopPropagation();toggleLike('quote6')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-quote6">0</span></button></div><div class="top-badge" id="top-quote6">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/quote7.jpg','quote7')"><img src="fotos/quote7.jpg" alt="Quote"><div class="grid-overlay"><div class="grid-tag">@jennaortegaspot</div><button class="like-btn" id="like-quote7" onclick="event.stopPropagation();toggleLike('quote7')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-quote7">0</span></button></div><div class="top-badge" id="top-quote7">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/quote8.jpg','quote8')"><img src="fotos/quote8.jpg" alt="Quote"><div class="grid-overlay"><div class="grid-tag">@jennaortegaspot</div><button class="like-btn" id="like-quote8" onclick="event.stopPropagation();toggleLike('quote8')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-quote8">0</span></button></div><div class="top-badge" id="top-quote8">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/quote9.jpg','quote9')"><img src="fotos/quote9.jpg" alt="Quote"><div class="grid-overlay"><div class="grid-tag">@jennaortegaspot</div><button class="like-btn" id="like-quote9" onclick="event.stopPropagation();toggleLike('quote9')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-quote9">0</span></button></div><div class="top-badge" id="top-quote9">Top</div></div>
-    <div class="grid-item" onclick="openLightbox('fotos/quote10.jpg','quote10')"><img src="fotos/quote10.jpg" alt="Quote"><div class="grid-overlay"><div class="grid-tag">@jennaortegaspot</div><button class="like-btn" id="like-quote10" onclick="event.stopPropagation();toggleLike('quote10')"><svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span class="like-count" id="count-quote10">0</span></button></div><div class="top-badge" id="top-quote10">Top</div></div>
-  </div>
+  <div class="grid-3" id="quotesGrid"></div>
   <div class="credit-bar">Photos by <a href="https://www.instagram.com/jennaortegaspot" target="_blank">@jennaortegaspot</a> · Thank you for the permission 🖤</div>
 </section>
 
@@ -406,122 +568,211 @@ footer{padding:1.5rem;text-align:center;font-size:0.58rem;letter-spacing:0.3em;t
 <footer>ortega.noir · fan page · jenna ortega · 2025</footer>
 
 <script>
-const SUPABASE_URL='https://luzxsqfzqkchvjzofdsq.supabase.co';
-const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1enhzcWZ6cWtjaHZqem9mZHNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2ODMwOTMsImV4cCI6MjA4OTI1OTA5M30.f0iYd7yAmq8iMT7mXJa4EAaWyQiTuo5-RnuUHeMBIPA';
+// ── SUPABASE ──────────────────────────────────────────────
+const SB_URL='https://luzxsqfzqkchvjzofdsq.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx1enhzcWZ6cWtjaHZqem9mZHNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2ODMwOTMsImV4cCI6MjA4OTI1OTA5M30.f0iYd7yAmq8iMT7mXJa4EAaWyQiTuo5-RnuUHeMBIPA';
+const H={'apikey':SB_KEY,'Authorization':`Bearer ${SB_KEY}`,'Content-Type':'application/json'};
+
+async function sbGet(table,query=''){
+  const r=await fetch(`${SB_URL}/rest/v1/${table}?${query}`,{headers:H});
+  return r.json();
+}
+async function sbPost(table,body){
+  const r=await fetch(`${SB_URL}/rest/v1/${table}`,{method:'POST',headers:{...H,'Prefer':'return=representation'},body:JSON.stringify(body)});
+  return r.json();
+}
+async function sbPatch(table,query,body){
+  const r=await fetch(`${SB_URL}/rest/v1/${table}?${query}`,{method:'PATCH',headers:H,body:JSON.stringify(body)});
+  return r.json();
+}
+
+// ── STATE ─────────────────────────────────────────────────
+let currentUser=JSON.parse(localStorage.getItem('on_user')||'null');
 let currentPhoto=null;
+let currentCommentPhoto=null;
+let currentChatUser=null;
+let chatInterval=null;
 const liked=JSON.parse(localStorage.getItem('liked')||'{}');
 
-// visits
-let visits=parseInt(localStorage.getItem('visits')||'0');visits++;localStorage.setItem('visits',visits);
-const vn=document.getElementById('visit-num');if(vn)vn.textContent=visits.toLocaleString();
+// ── PHOTOS DATA ───────────────────────────────────────────
+const photos={
+  casual:Array.from({length:10},(_,i)=>({id:`casual${i+1}`,src:`fotos/casual${i+1}.jpg`,tag:'Jenna Ortega'})),
+  updates:Array.from({length:23},(_,i)=>({id:`update${i+1}`,src:`fotos/update${i+1}.jpg`,tag:'Jenna Ortega'})),
+  quotes:Array.from({length:10},(_,i)=>({id:`quote${i+1}`,src:`fotos/quote${i+1}.jpg`,tag:'@jennaortegaspot'}))
+};
+const photoSrcs={};
 
-// theme
+function photoItemHTML(p){
+  photoSrcs[p.id]=p.src;
+  return `<div class="grid-item" onclick="openLightbox('${p.src}','${p.id}')">
+    <img src="${p.src}" alt="Jenna">
+    <div class="grid-overlay">
+      <div class="grid-tag">${p.tag}</div>
+      <div class="grid-actions">
+        <button class="like-btn" id="like-${p.id}" onclick="event.stopPropagation();toggleLike('${p.id}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="like-count" id="count-${p.id}">0</span>
+        </button>
+        <button class="comment-btn" onclick="event.stopPropagation();openComments('${p.id}')" title="Comments">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </button>
+        <button class="share-photo-btn" onclick="event.stopPropagation();sharePhoto('${p.src}')" title="Share">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f5f0e8" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="top-badge" id="top-${p.id}">Top</div>
+  </div>`;
+}
+
+document.getElementById('photosGrid').innerHTML=photos.casual.map(photoItemHTML).join('');
+document.getElementById('updatesGrid').innerHTML=photos.updates.map(photoItemHTML).join('');
+document.getElementById('quotesGrid').innerHTML=photos.quotes.map(photoItemHTML).join('');
+
+// ── VISITS ────────────────────────────────────────────────
+let visits=parseInt(localStorage.getItem('visits')||'0');visits++;
+localStorage.setItem('visits',visits);
+const vn=document.getElementById('visit-num');
+if(vn)vn.textContent=visits.toLocaleString();
+
+// ── THEME ─────────────────────────────────────────────────
 const themeBtn=document.getElementById('themeBtn');
 if(localStorage.getItem('theme')==='light'){document.body.classList.add('light');themeBtn.textContent='🌙';}
-themeBtn.addEventListener('click',()=>{document.body.classList.toggle('light');const isLight=document.body.classList.contains('light');localStorage.setItem('theme',isLight?'light':'dark');themeBtn.textContent=isLight?'🌙':'☀';});
+themeBtn.addEventListener('click',()=>{
+  document.body.classList.toggle('light');
+  const isLight=document.body.classList.contains('light');
+  localStorage.setItem('theme',isLight?'light':'dark');
+  themeBtn.textContent=isLight?'🌙':'☀';
+});
 
-// back to top
+// ── SCROLL ────────────────────────────────────────────────
 window.addEventListener('scroll',()=>{document.getElementById('backTop').classList.toggle('show',window.scrollY>500);});
 
-// countdown
+// ── COUNTDOWN ─────────────────────────────────────────────
 function updateCountdown(){
   const now=new Date();
   let bday=new Date(now.getFullYear(),8,27);
   if(now>bday)bday=new Date(now.getFullYear()+1,8,27);
   const diff=bday-now;
-  const d=Math.floor(diff/86400000);
-  const h=Math.floor((diff%86400000)/3600000);
-  const m=Math.floor((diff%3600000)/60000);
-  const s=Math.floor((diff%60000)/1000);
-  document.getElementById('cd-days').textContent=d;
-  document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
-  document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
-  document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
+  document.getElementById('cd-days').textContent=Math.floor(diff/86400000);
+  document.getElementById('cd-hours').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
 }
 updateCountdown();setInterval(updateCountdown,1000);
 
-// vote
-const votes=JSON.parse(localStorage.getItem('votes')||'{"wednesday":0,"beetlejuice":0,"scream":0,"you":0,"scream6":0,"yesday":0}');
-const myVote=localStorage.getItem('myVote');
-if(myVote){const btn=document.querySelector(`[onclick="castVote('${myVote}')"]`);if(btn)btn.classList.add('voted');}
-function updateVoteUI(){
-  const total=Object.values(votes).reduce((a,b)=>a+b,0)||1;
-  Object.keys(votes).forEach(k=>{
-    const pct=Math.round(votes[k]/total*100);
-    const bar=document.getElementById('vbar-'+k);
-    const pctEl=document.getElementById('vpct-'+k);
-    if(bar)bar.style.width=pct+'%';
-    if(pctEl)pctEl.textContent=pct+'%';
-  });
+// ── TOAST ─────────────────────────────────────────────────
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
 }
-function castVote(key){
-  if(myVote)return;
-  votes[key]=(votes[key]||0)+1;
-  localStorage.setItem('votes',JSON.stringify(votes));
-  localStorage.setItem('myVote',key);
-  const btn=document.querySelector(`[onclick="castVote('${key}')"]`);
-  if(btn)btn.classList.add('voted');
-  updateVoteUI();
-}
-updateVoteUI();
 
-// fan messages
-const fanMsgs=JSON.parse(localStorage.getItem('fanMsgs')||'[]');
-function renderFanMsgs(){
-  const container=document.getElementById('fanMessages');
-  if(fanMsgs.length===0){container.innerHTML='<div style="text-align:center;padding:1rem;font-size:0.7rem;color:var(--muted);letter-spacing:0.2em">Be the first to leave a message 🖤</div>';return;}
-  container.innerHTML=fanMsgs.slice(-10).reverse().map(m=>`<div class="fan-msg"><div class="fan-msg-name">${m.name}</div><div class="fan-msg-text">${m.text}</div></div>`).join('');
+// ── AUTH ──────────────────────────────────────────────────
+function openAuth(){
+  document.getElementById('authOverlay').classList.add('open');
+  document.getElementById('authModal').classList.add('open');
 }
-function submitFanMsg(){
-  const name=document.getElementById('fanName').value.trim();
-  const text=document.getElementById('fanMsg').value.trim();
-  if(!name||!text)return;
-  fanMsgs.push({name,text});
-  localStorage.setItem('fanMsgs',JSON.stringify(fanMsgs));
-  document.getElementById('fanName').value='';
-  document.getElementById('fanMsg').value='';
-  renderFanMsgs();
-  showToast('Message sent! 🖤');
+function closeAuth(){
+  document.getElementById('authOverlay').classList.remove('open');
+  document.getElementById('authModal').classList.remove('open');
 }
-renderFanMsgs();
+function switchTab(tab){
+  document.getElementById('form-login').style.display=tab==='login'?'flex':'none';
+  document.getElementById('form-register').style.display=tab==='register'?'flex':'none';
+  document.getElementById('tab-login').classList.toggle('active',tab==='login');
+  document.getElementById('tab-register').classList.toggle('active',tab==='register');
+}
+function previewAvatar(input){
+  const file=input.files[0];
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const prev=document.getElementById('avatarPreview');
+    prev.src=e.target.result;prev.style.display='block';
+    document.getElementById('avatarPlaceholder').style.display='none';
+  };
+  reader.readAsDataURL(file);
+}
+async function register(){
+  const username=document.getElementById('reg-username').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  const password=document.getElementById('reg-password').value;
+  const bio=document.getElementById('reg-bio').value.trim();
+  const avatarFile=document.getElementById('avatarInput').files[0];
+  if(!username||!email||!password){showToast('Please fill all fields');return;}
+  const existing=await sbGet('user',`email=eq.${encodeURIComponent(email)}`);
+  if(existing.length>0){showToast('Email already registered');return;}
+  const existingUser=await sbGet('user',`username=eq.${encodeURIComponent(username)}`);
+  if(existingUser.length>0){showToast('Username taken');return;}
+  let avatar='';
+  if(avatarFile){
+    const reader=new FileReader();
+    avatar=await new Promise(res=>{reader.onload=e=>res(e.target.result);reader.readAsDataURL(avatarFile);});
+  }
+  const result=await sbPost('user',{username,email,password,bio,avatar});
+  if(result&&result[0]){
+    currentUser=result[0];
+    localStorage.setItem('on_user',JSON.stringify(currentUser));
+    updateAuthUI();
+    closeAuth();
+    showToast(`Welcome, @${username}! 🖤`);
+  } else {
+    showToast('Error creating account. Try again.');
+  }
+}
+async function login(){
+  const email=document.getElementById('login-email').value.trim();
+  const password=document.getElementById('login-password').value;
+  if(!email||!password){showToast('Please fill all fields');return;}
+  const result=await sbGet('user',`email=eq.${encodeURIComponent(email)}&password=eq.${encodeURIComponent(password)}`);
+  if(result&&result[0]){
+    currentUser=result[0];
+    localStorage.setItem('on_user',JSON.stringify(currentUser));
+    updateAuthUI();
+    closeAuth();
+    showToast(`Welcome back, @${currentUser.username}! 🖤`);
+  } else {
+    showToast('Incorrect email or password');
+  }
+}
+function logout(){
+  currentUser=null;
+  localStorage.removeItem('on_user');
+  updateAuthUI();
+  showToast('Signed out 🖤');
+}
+function updateAuthUI(){
+  const area=document.getElementById('authArea');
+  if(currentUser){
+    area.innerHTML=`<div class="user-nav">
+      <img class="user-nav-avatar" src="${currentUser.avatar||'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><circle cx=%2212%22 cy=%2212%22 r=%2212%22 fill=%22%23c8a97e%22/><text x=%2212%22 y=%2217%22 text-anchor=%22middle%22 fill=%22%230a0a0a%22 font-size=%2212%22>${currentUser.username[0].toUpperCase()}</text></svg>'}" alt="">
+      <span class="user-nav-name">@${currentUser.username}</span>
+      <button class="user-nav-logout" onclick="logout()">Sign out</button>
+      <button class="icon-btn" onclick="openMessages()" title="Messages">✉</button>
+    </div>`;
+    document.getElementById('commentsInputWrap').style.display='flex';
+    document.getElementById('commentsLoginMsg').style.display='none';
+  } else {
+    area.innerHTML=`<button class="auth-nav-btn" onclick="openAuth()">Join</button>`;
+    document.getElementById('commentsInputWrap').style.display='none';
+    document.getElementById('commentsLoginMsg').style.display='block';
+  }
+}
 
-// films
-const films={
-  scream7:{year:'2026',title:'Scream VII',role:'Sam Carpenter',desc:'The latest installment in the Scream franchise. Jenna reprises her iconic role as Sam Carpenter. Highly anticipated by fans worldwide.',tags:['Horror','Thriller','2026']},
-  wednesday2:{year:'2025',title:'Wednesday — Season 2',role:'Wednesday Addams',desc:'The highly anticipated second season of the Netflix global hit. Jenna returns as the iconic Wednesday Addams facing darker mysteries.',tags:['Netflix','Series','Fantasy','2025']},
-  beetlejuice:{year:'2024',title:'Beetlejuice Beetlejuice',role:'Astrid Deetz',desc:'Tim Burton\'s long-awaited sequel. Jenna plays Astrid Deetz, the teenage daughter of Lydia. Earned over $450M worldwide.',tags:['Fantasy','Comedy','Tim Burton','2024']},
-  scream6:{year:'2023',title:'Scream VI',role:'Sam Carpenter',desc:'Set in New York City. Sam and Tara face a new and brutal Ghostface. One of the highest-grossing entries in the franchise.',tags:['Horror','Thriller','2023']},
-  wednesday1:{year:'2022',title:'Wednesday',role:'Wednesday Addams',desc:'The breakout role that made Jenna a global superstar. One of the most-watched Netflix shows in history.',tags:['Netflix','Series','Horror','2022']},
-  scream5:{year:'2022',title:'Scream',role:'Sam Carpenter',desc:'A legacy sequel to the original trilogy. Jenna stars as Sam Carpenter, revealed to be the biological daughter of Billy Loomis.',tags:['Horror','Thriller','2022']},
-  yesday:{year:'2021',title:'Yes Day',role:'Katie Torres',desc:'A Netflix family comedy. Jenna plays the eldest daughter Katie navigating family life.',tags:['Comedy','Netflix','Family','2021']},
-  you:{year:'2019',title:'You — Season 2',role:'Ellie Alves',desc:'Jenna joined the cast as Ellie Alves, a sharp and street-smart teenager. Her performance earned her wider recognition.',tags:['Netflix','Thriller','Series','2019']}
-};
-function openFilm(id){
-  const f=films[id];
-  document.getElementById('fYear').textContent=f.year;
-  document.getElementById('fTitle').textContent=f.title;
-  document.getElementById('fRole').textContent='as '+f.role;
-  document.getElementById('fDesc').textContent=f.desc;
-  document.getElementById('fTags').innerHTML=f.tags.map(t=>`<span class="film-tag">${t}</span>`).join('');
-  document.getElementById('filmModal').classList.add('active');
-}
-function closeFilm(){document.getElementById('filmModal').classList.remove('active');}
-
-// supabase likes
+// ── LIKES ─────────────────────────────────────────────────
 async function getLikes(photoId){
-  const r=await fetch(`${SUPABASE_URL}/rest/v1/likes?photo_id=eq.${photoId}&select=count`,{headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}});
-  const d=await r.json();return d.length>0?d[0].count:0;
+  const d=await sbGet('likes',`photo_id=eq.${photoId}&select=count`);
+  return d.length>0?d[0].count:0;
 }
 async function addLike(photoId){
-  const r=await fetch(`${SUPABASE_URL}/rest/v1/likes?photo_id=eq.${photoId}`,{headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}});
-  const d=await r.json();
-  if(d.length===0){await fetch(`${SUPABASE_URL}/rest/v1/likes`,{method:'POST',headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'},body:JSON.stringify({photo_id:photoId,count:1})});}
-  else{await fetch(`${SUPABASE_URL}/rest/v1/likes?photo_id=eq.${photoId}`,{method:'PATCH',headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'},body:JSON.stringify({count:d[0].count+1})});}
+  const d=await sbGet('likes',`photo_id=eq.${photoId}`);
+  if(d.length===0)await sbPost('likes',{photo_id:photoId,count:1});
+  else await sbPatch('likes',`photo_id=eq.${photoId}`,{count:d[0].count+1});
 }
 async function removeLike(photoId){
-  const r=await fetch(`${SUPABASE_URL}/rest/v1/likes?photo_id=eq.${photoId}`,{headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}});
-  const d=await r.json();
-  if(d.length>0&&d[0].count>0){await fetch(`${SUPABASE_URL}/rest/v1/likes?photo_id=eq.${photoId}`,{method:'PATCH',headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'},body:JSON.stringify({count:d[0].count-1})});}
+  const d=await sbGet('likes',`photo_id=eq.${photoId}`);
+  if(d.length>0&&d[0].count>0)await sbPatch('likes',`photo_id=eq.${photoId}`,{count:d[0].count-1});
 }
 async function toggleLike(photoId){
   const btn=document.getElementById('like-'+photoId);
@@ -531,8 +782,7 @@ async function toggleLike(photoId){
   localStorage.setItem('liked',JSON.stringify(liked));
   const newCount=await getLikes(photoId);
   countEl.textContent=newCount;
-  updateTopBadges();
-  updateHallOfFame();
+  updateTopBadges();updateHallOfFame();
 }
 async function toggleLightboxLike(){
   if(!currentPhoto)return;
@@ -540,16 +790,25 @@ async function toggleLightboxLike(){
   const count=await getLikes(currentPhoto);
   document.getElementById('lightbox-like-count').textContent=count;
   const lbBtn=document.getElementById('lightbox-like-btn');
-  if(liked[currentPhoto])lbBtn.classList.add('liked');
-  else lbBtn.classList.remove('liked');
+  lbBtn.classList.toggle('liked',!!liked[currentPhoto]);
 }
-
-// hall of fame
-const photoSrcs={};
-document.querySelectorAll('.grid-item img').forEach(img=>{
-  const id=img.closest('.grid-item').querySelector('.like-btn')?.id?.replace('like-','');
-  if(id)photoSrcs[id]=img.src;
-});
+async function loadAllLikes(){
+  const d=await sbGet('likes','select=photo_id,count');
+  d.forEach(item=>{
+    const el=document.getElementById('count-'+item.photo_id);
+    if(el)el.textContent=item.count;
+    if(liked[item.photo_id]){const btn=document.getElementById('like-'+item.photo_id);if(btn)btn.classList.add('liked');}
+  });
+  updateTopBadges();updateHallOfFame();
+}
+function updateTopBadges(){
+  const counts=[];
+  document.querySelectorAll('.like-count').forEach(el=>{counts.push({id:el.id.replace('count-',''),count:parseInt(el.textContent)||0});});
+  counts.sort((a,b)=>b.count-a.count);
+  const top3=counts.slice(0,3).filter(x=>x.count>0).map(x=>x.id);
+  document.querySelectorAll('.top-badge').forEach(el=>el.classList.remove('show'));
+  top3.forEach(id=>{const badge=document.getElementById('top-'+id);if(badge)badge.classList.add('show');});
+}
 function updateHallOfFame(){
   const counts=[];
   document.querySelectorAll('.like-count').forEach(el=>{
@@ -562,48 +821,229 @@ function updateHallOfFame(){
   if(top3.length===0){hall.innerHTML='<div style="text-align:center;padding:2rem;color:var(--muted);font-size:0.7rem;letter-spacing:0.2em;grid-column:1/-1">Like photos to see the top 3 here 🖤</div>';return;}
   hall.innerHTML=top3.map((p,i)=>`<div class="hall-item" onclick="openLightbox('${p.src}','${p.id}')"><img src="${p.src}" alt="Top ${i+1}"><div class="hall-rank">${['①','②','③'][i]}</div><div class="hall-likes">♥ ${p.count}</div></div>`).join('');
 }
-
-async function loadAllLikes(){
-  const r=await fetch(`${SUPABASE_URL}/rest/v1/likes?select=photo_id,count`,{headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`}});
-  const d=await r.json();
-  d.forEach(item=>{
-    const el=document.getElementById('count-'+item.photo_id);
-    if(el)el.textContent=item.count;
-    if(liked[item.photo_id]){const btn=document.getElementById('like-'+item.photo_id);if(btn)btn.classList.add('liked');}
-  });
-  updateTopBadges();
-  updateHallOfFame();
-}
-function updateTopBadges(){
-  const counts=[];
-  document.querySelectorAll('.like-count').forEach(el=>{counts.push({id:el.id.replace('count-',''),count:parseInt(el.textContent)||0});});
-  counts.sort((a,b)=>b.count-a.count);
-  const top3=counts.slice(0,3).filter(x=>x.count>0).map(x=>x.id);
-  document.querySelectorAll('.top-badge').forEach(el=>el.classList.remove('show'));
-  top3.forEach(id=>{const badge=document.getElementById('top-'+id);if(badge)badge.classList.add('show');});
-}
 loadAllLikes();
 
+// ── LIGHTBOX ──────────────────────────────────────────────
 function openLightbox(src,photoId){
   currentPhoto=photoId;
   document.getElementById('lightbox-img').src=src;
   document.getElementById('lightbox').classList.add('active');
   getLikes(photoId).then(c=>{document.getElementById('lightbox-like-count').textContent=c;});
-  const lbBtn=document.getElementById('lightbox-like-btn');
-  if(liked[photoId])lbBtn.classList.add('liked');
-  else lbBtn.classList.remove('liked');
+  document.getElementById('lightbox-like-btn').classList.toggle('liked',!!liked[photoId]);
 }
 function closeLightbox(){document.getElementById('lightbox').classList.remove('active');currentPhoto=null;}
 document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
+function openCommentsFromLightbox(){if(currentPhoto){closeLightbox();openComments(currentPhoto);}}
+function shareCurrentPhoto(){if(currentPhoto)sharePhoto(photoSrcs[currentPhoto]||window.location.href);}
+function copyPhotoLink(){navigator.clipboard.writeText(window.location.href).then(()=>showToast('Link copied! 🔗'));}
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2000);
+// ── COMMENTS ──────────────────────────────────────────────
+function openComments(photoId){
+  currentCommentPhoto=photoId;
+  document.getElementById('commentsOverlay').classList.add('open');
+  document.getElementById('commentsModal').classList.add('open');
+  loadComments(photoId);
 }
-function sharePhoto(){navigator.clipboard.writeText(window.location.href).then(()=>showToast('Link copied!'));}
+function closeComments(){
+  document.getElementById('commentsOverlay').classList.remove('open');
+  document.getElementById('commentsModal').classList.remove('open');
+  currentCommentPhoto=null;
+}
+async function loadComments(photoId){
+  const list=document.getElementById('commentsList');
+  list.innerHTML='<div class="comments-empty">Loading...</div>';
+  const d=await sbGet('comments',`photo_id=eq.${photoId}&order=created_at.asc`);
+  if(d.length===0){list.innerHTML='<div class="comments-empty">No comments yet. Be the first! 🖤</div>';return;}
+  list.innerHTML=d.map(c=>`
+    <div class="comment-item">
+      <div class="comment-avatar">${c.username?c.username[0].toUpperCase():'?'}</div>
+      <div class="comment-body">
+        <div class="comment-username">@${c.username||'user'}</div>
+        <div class="comment-text">${c.text}</div>
+        <div class="comment-time">${timeAgo(c.created_at)}</div>
+      </div>
+    </div>
+  `).join('');
+  list.scrollTop=list.scrollHeight;
+}
+async function sendComment(){
+  if(!currentUser){showToast('Sign in to comment');return;}
+  const input=document.getElementById('commentInput');
+  const text=input.value.trim();
+  if(!text)return;
+  await sbPost('comments',{user_id:currentUser.id,username:currentUser.username,photo_id:currentCommentPhoto,text});
+  input.value='';
+  loadComments(currentCommentPhoto);
+  showToast('Comment posted 🖤');
+}
+
+// ── SHARE ─────────────────────────────────────────────────
+function sharePhoto(src){
+  const url=`https://orteganoirpage.github.io/ortega-noir`;
+  const text=`Check out this photo on ortega.noir! ${url}`;
+  if(navigator.share){navigator.share({title:'ortega.noir',text,url}).catch(()=>{});}
+  else{
+    const menu=`Share via:\n• WhatsApp: https://wa.me/?text=${encodeURIComponent(text)}\n• Twitter: https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    navigator.clipboard.writeText(url).then(()=>showToast('Link copied! Share it 🔗'));
+  }
+}
 function copyLink(){navigator.clipboard.writeText('https://orteganoirpage.github.io/ortega-noir').then(()=>showToast('Link copied!'));}
 
+// ── MESSAGES ──────────────────────────────────────────────
+function openMessages(){
+  if(!currentUser){openAuth();return;}
+  document.getElementById('messagesOverlay').classList.add('open');
+  document.getElementById('messagesModal').classList.add('open');
+  loadConversations();
+}
+function closeMessages(){
+  document.getElementById('messagesOverlay').classList.remove('open');
+  document.getElementById('messagesModal').classList.remove('open');
+  if(chatInterval)clearInterval(chatInterval);
+  document.getElementById('chatView').classList.remove('active');
+  currentChatUser=null;
+}
+async function searchUsers(query){
+  const resultsEl=document.getElementById('searchResults');
+  if(!query.trim()){resultsEl.innerHTML='';return;}
+  const d=await sbGet('user',`username=ilike.*${query}*&limit=5`);
+  const filtered=d.filter(u=>u.id!==currentUser.id);
+  if(filtered.length===0){resultsEl.innerHTML='<div style="padding:0.5rem 0;font-size:0.62rem;color:var(--muted);letter-spacing:0.15em">No users found</div>';return;}
+  resultsEl.innerHTML=filtered.map(u=>`
+    <div class="search-result-item" onclick="openChat(${JSON.stringify(u).replace(/"/g,'&quot;')})">
+      <div class="search-result-avatar">${u.username[0].toUpperCase()}</div>
+      <div class="search-result-name">@${u.username}</div>
+    </div>
+  `).join('');
+}
+async function loadConversations(){
+  const convList=document.getElementById('convList');
+  const sent=await sbGet('messages',`sender_id=eq.${currentUser.id}&order=created_at.desc`);
+  const received=await sbGet('messages',`receiver_id=eq.${currentUser.id}&order=created_at.desc`);
+  const allMsgs=[...sent,...received];
+  if(allMsgs.length===0){convList.innerHTML='<div class="conv-empty">No messages yet.<br>Search for a user to start chatting 🖤</div>';return;}
+  const convMap={};
+  allMsgs.forEach(m=>{
+    const otherId=m.sender_id===currentUser.id?m.receiver_id:m.sender_id;
+    if(!convMap[otherId]||new Date(m.created_at)>new Date(convMap[otherId].created_at))convMap[otherId]=m;
+  });
+  const otherIds=Object.keys(convMap);
+  const users=await Promise.all(otherIds.map(id=>sbGet('user',`id=eq.${id}`)));
+  convList.innerHTML=users.map((u,i)=>{
+    if(!u[0])return'';
+    const msg=convMap[otherIds[i]];
+    return`<div class="conv-item" onclick="openChat(${JSON.stringify(u[0]).replace(/"/g,'&quot;')})">
+      <div class="conv-avatar">${u[0].username[0].toUpperCase()}</div>
+      <div class="conv-info">
+        <div class="conv-name">@${u[0].username}</div>
+        <div class="conv-last">${msg.text}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function openChat(user){
+  currentChatUser=user;
+  document.getElementById('chatUserName').textContent=`@${user.username}`;
+  document.getElementById('searchResults').innerHTML='';
+  document.getElementById('userSearchInput').value='';
+  document.getElementById('chatView').classList.add('active');
+  loadChatMessages();
+  if(chatInterval)clearInterval(chatInterval);
+  chatInterval=setInterval(loadChatMessages,3000);
+}
+function backToConvList(){
+  document.getElementById('chatView').classList.remove('active');
+  if(chatInterval)clearInterval(chatInterval);
+  currentChatUser=null;
+  loadConversations();
+}
+async function loadChatMessages(){
+  if(!currentUser||!currentChatUser)return;
+  const sent=await sbGet('messages',`sender_id=eq.${currentUser.id}&receiver_id=eq.${currentChatUser.id}`);
+  const received=await sbGet('messages',`sender_id=eq.${currentChatUser.id}&receiver_id=eq.${currentUser.id}`);
+  const all=[...sent,...received].sort((a,b)=>new Date(a.created_at)-new Date(b.created_at));
+  const container=document.getElementById('chatMessages');
+  if(all.length===0){container.innerHTML='<div style="text-align:center;padding:2rem;font-size:0.62rem;color:var(--muted)">Start the conversation 🖤</div>';return;}
+  container.innerHTML=all.map(m=>`
+    <div class="chat-msg ${m.sender_id===currentUser.id?'sent':'received'}">
+      ${m.text}
+      <div class="chat-msg-time">${timeAgo(m.created_at)}</div>
+    </div>
+  `).join('');
+  container.scrollTop=container.scrollHeight;
+}
+async function sendMessage(){
+  if(!currentUser||!currentChatUser)return;
+  const input=document.getElementById('chatInput');
+  const text=input.value.trim();
+  if(!text)return;
+  input.value='';
+  await sbPost('messages',{sender_id:currentUser.id,receiver_id:currentChatUser.id,text,read:false});
+  loadChatMessages();
+}
+
+// ── VOTE ──────────────────────────────────────────────────
+const votes=JSON.parse(localStorage.getItem('votes')||'{"wednesday":0,"beetlejuice":0,"scream":0,"you":0,"scream6":0,"yesday":0}');
+const myVote=localStorage.getItem('myVote');
+if(myVote){const btn=document.querySelector(`[onclick="castVote('${myVote}')"]`);if(btn)btn.classList.add('voted');}
+function updateVoteUI(){
+  const total=Object.values(votes).reduce((a,b)=>a+b,0)||1;
+  Object.keys(votes).forEach(k=>{
+    const pct=Math.round(votes[k]/total*100);
+    const bar=document.getElementById('vbar-'+k);const pctEl=document.getElementById('vpct-'+k);
+    if(bar)bar.style.width=pct+'%';if(pctEl)pctEl.textContent=pct+'%';
+  });
+}
+function castVote(key){
+  if(myVote)return;
+  votes[key]=(votes[key]||0)+1;
+  localStorage.setItem('votes',JSON.stringify(votes));localStorage.setItem('myVote',key);
+  const btn=document.querySelector(`[onclick="castVote('${key}')"]`);if(btn)btn.classList.add('voted');
+  updateVoteUI();
+}
+updateVoteUI();
+
+// ── FAN MESSAGES ──────────────────────────────────────────
+const fanMsgs=JSON.parse(localStorage.getItem('fanMsgs')||'[]');
+function renderFanMsgs(){
+  const container=document.getElementById('fanMessages');
+  if(fanMsgs.length===0){container.innerHTML='<div style="text-align:center;padding:1rem;font-size:0.7rem;color:var(--muted);letter-spacing:0.2em">Be the first to leave a message 🖤</div>';return;}
+  container.innerHTML=fanMsgs.slice(-10).reverse().map(m=>`<div class="fan-msg"><div class="fan-msg-name">${m.name}</div><div class="fan-msg-text">${m.text}</div></div>`).join('');
+}
+function submitFanMsg(){
+  const name=document.getElementById('fanName').value.trim();
+  const text=document.getElementById('fanMsg').value.trim();
+  if(!name||!text)return;
+  fanMsgs.push({name,text});
+  localStorage.setItem('fanMsgs',JSON.stringify(fanMsgs));
+  document.getElementById('fanName').value='';document.getElementById('fanMsg').value='';
+  renderFanMsgs();showToast('Message sent! 🖤');
+}
+renderFanMsgs();
+
+// ── FILMS ─────────────────────────────────────────────────
+const films={
+  scream7:{year:'2026',title:'Scream VII',role:'Sam Carpenter',desc:'The latest installment in the Scream franchise. Jenna reprises her iconic role as Sam Carpenter.',tags:['Horror','Thriller','2026']},
+  wednesday2:{year:'2025',title:'Wednesday — Season 2',role:'Wednesday Addams',desc:'The highly anticipated second season of the Netflix global hit.',tags:['Netflix','Series','Fantasy','2025']},
+  beetlejuice:{year:'2024',title:'Beetlejuice Beetlejuice',role:'Astrid Deetz',desc:"Tim Burton's long-awaited sequel. Earned over $450M worldwide.",tags:['Fantasy','Comedy','Tim Burton','2024']},
+  scream6:{year:'2023',title:'Scream VI',role:'Sam Carpenter',desc:'Set in New York City. One of the highest-grossing entries in the franchise.',tags:['Horror','Thriller','2023']},
+  wednesday1:{year:'2022',title:'Wednesday',role:'Wednesday Addams',desc:'The breakout role that made Jenna a global superstar.',tags:['Netflix','Series','Horror','2022']},
+  scream5:{year:'2022',title:'Scream',role:'Sam Carpenter',desc:'A legacy sequel to the original trilogy.',tags:['Horror','Thriller','2022']},
+  yesday:{year:'2021',title:'Yes Day',role:'Katie Torres',desc:'A Netflix family comedy.',tags:['Comedy','Netflix','Family','2021']},
+  you:{year:'2019',title:'You — Season 2',role:'Ellie Alves',desc:'Her performance earned her wider recognition.',tags:['Netflix','Thriller','Series','2019']}
+};
+function openFilm(id){
+  const f=films[id];
+  document.getElementById('fYear').textContent=f.year;
+  document.getElementById('fTitle').textContent=f.title;
+  document.getElementById('fRole').textContent='as '+f.role;
+  document.getElementById('fDesc').textContent=f.desc;
+  document.getElementById('fTags').innerHTML=f.tags.map(t=>`<span class="film-tag">${t}</span>`).join('');
+  document.getElementById('filmModal').classList.add('active');
+}
+function closeFilm(){document.getElementById('filmModal').classList.remove('active');}
+
+// ── PARTICLES ─────────────────────────────────────────────
 const container=document.getElementById('particles');
 for(let i=0;i<20;i++){
   const p=document.createElement('div');p.className='particle';
@@ -613,15 +1053,31 @@ for(let i=0;i<20;i++){
   p.style.width=p.style.height=(Math.random()>0.5?'2px':'1px');
   container.appendChild(p);
 }
+
+// ── MUSIC ─────────────────────────────────────────────────
 const music=document.getElementById('bgmusic');
-const btn=document.getElementById('musicBtn');
+const musicBtn=document.getElementById('musicBtn');
 let playing=false;music.volume=0.15;
 document.addEventListener('click',()=>{if(!playing){music.play();playing=true;}},{once:true});
-btn.addEventListener('click',e=>{
+musicBtn.addEventListener('click',e=>{
   e.stopPropagation();
-  if(music.paused){music.play();playing=true;btn.style.opacity='1';}
-  else{music.pause();playing=false;btn.style.opacity='0.4';}
+  if(music.paused){music.play();playing=true;musicBtn.style.opacity='1';}
+  else{music.pause();playing=false;musicBtn.style.opacity='0.4';}
 });
+
+// ── HELPERS ───────────────────────────────────────────────
+function timeAgo(dateStr){
+  const diff=Date.now()-new Date(dateStr).getTime();
+  const mins=Math.floor(diff/60000);
+  if(mins<1)return'just now';
+  if(mins<60)return`${mins}m ago`;
+  const hrs=Math.floor(mins/60);
+  if(hrs<24)return`${hrs}h ago`;
+  return`${Math.floor(hrs/24)}d ago`;
+}
+
+// ── INIT ──────────────────────────────────────────────────
+updateAuthUI();
 </script>
 </body>
 </html>
